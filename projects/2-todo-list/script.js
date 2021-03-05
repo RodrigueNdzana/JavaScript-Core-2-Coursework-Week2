@@ -1,14 +1,53 @@
-function populateTodoList(todos) {
-  let list = document.getElementById("todo-list");
-  // Write your code to create todo list elements with completed and delete buttons here, all todos should display inside the "todo-list" element.
-}
-
 // These are the same todos that currently display in the HTML
 // You will want to remove the ones in the current HTML after you have created them using JavaScript
 let todos = [
   { task: "Wash the dishes", completed: false },
   { task: "Do the shopping", completed: false },
 ];
+function populateTodoList(todos) {
+  let listEl=document.getElementById('todo-list')
+  todos.forEach((el,index) => {
+    let createList=document.createElement('li')
+    createList.className="list-group-item d-flex justify-content-between align-items-center";
+    createList.innerHTML=el.task;
+    //console.log(createList);
+
+  // create the <span> </span> and assign the provided class name
+    let createSpan=document.createElement('span');
+    createSpan.className="badge bg-primary rounded-pill";
+
+  // create a fa icon
+  let createFa=document.createElement('i');
+  createFa.className='fa fa-check';
+  // set his attribute by using the setAttribute method
+  createFa.setAttribute('aria-hidden',true);
+
+  //create a click event
+  createFa.addEventListener('click', ()=>{
+    if(createList.style.textDecorationLine !=='line-through'){
+      createList.style.textDecorationLine=='none'
+    }
+    else{
+      createList.style.textDecorationLine='none'
+    };
+  });
+
+  //delete trash event
+  let createDeleteTrash=document.createElement('i');
+  createDeleteTrash.className='fa fa-trash';
+  createDeleteTrash.setAttribute('aria-hidden',true)
+  createDeleteTrash.addEventListener('click', ()=>{
+    delete todos[index];
+    populateTodoList();
+  });
+
+ 
+  
+
+}
+
+
+
 
 populateTodoList(todos);
 
